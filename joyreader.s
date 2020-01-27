@@ -66,17 +66,21 @@ readloop:
         jsr read_joystick
 
 check_up:
-        #ckbtn up, down
+        #ckbtn up, check_down
+        #print s_up
 check_down:
-        #ckbtn down, left
+        #ckbtn down, check_left
+        #print s_down
 check_left:
-        #ckbtn left, right
+        #ckbtn left, check_right
+        #print s_left
 check_right:
-        #ckbtn right, fire
+        #ckbtn right, check_fire
+        #print s_right
 check_fire:
         #ckbtn fire, bottom
         jmp say_hello
-check_bottom:
+bottom:
         jmp readloop
 
 say_hello:
