@@ -3,28 +3,35 @@
 CR      = 13
 LF      = 10
 
-println .macro
+; wrapper for the print_ subroutine that takes care
+; of loading a target address into target.
+print   .macro
         lda #(\1 & $00ff)
         sta target
         lda #(\1 >> 8)
         sta target + 1
-        jsr print
+        jsr print_
         .endm
 
+; If the named button has been pressed, print the name. Otherwise
+; continue to next check.
 ckbtn   .macro
         bit \1
         bmi check_\2
         bvc check_\2
-        #println s_\1
+        #print s_\1
         .endm
 
 *       = $00fb
-target  .addr ?
+target  .addr ?         ; This is where we store the address for
+                        ; a string to be printed by print_.
 
+
+; program header from http://tass64.sourceforge.net/
 *       = $0801
-        .word (+), 10  ;pointer, line number
+        .word (+), 10   ;pointer, line number
         .null $9e, format("%d", start) ;will be sys 2061
-+       .word 0          ;basic line end
++       .word 0         ;basic line end
 
 up      .byte 0
 down    .byte 0
@@ -54,7 +61,7 @@ say_hello:
         sta target
         lda #(s_hello >> 8)
         sta target + 1
-        jsr print
+        jsr print_
         rts
 
 ; from https://codebase64.org/doku.php?id=base:joystick_input_handling
@@ -72,7 +79,7 @@ read_joystick:
         ror fire
         rts
 
-print:
+print_:
         ldy #0
 loop:   
         lda (target), y
@@ -81,7 +88,7 @@ loop:
         jsr $ffd2
         iny
         bne loop
-eol:
+eol:                    ; print cr/lf
         lda #CR
         jsr $ffd2
         lda #LF
