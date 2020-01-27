@@ -6,23 +6,32 @@ CLEARSCREEN = $e544
 CHROUT  = $ffd2
 PRA     = $dc00
 
+; print <address>
+;
 ; wrapper for the print_ subroutine that takes care
 ; of loading a pointer into target.
 print   .macro
         lda #(\1 & $00ff)
-        sta target
-        lda #(\1 >> 8)
-        sta target + 1
+                        ; A pointer is 16 bits but our registers are
+        sta target      ; only 8 bits, so we need to separately load
+        lda #(\1 >> 8)  ; and store the low byte of the pointer followed
+        sta target + 1  ; by the high byte of the pointer.
         jsr print_
         .endm
 
+; ckbtn <button> <label_if_not_pressed>
 ; If the named button has been pressed, print the name. Otherwise
-; continue to next check.
+; branch to <label_if_not_pressed>
 ckbtn   .macro
-        bit \1
-        bmi check_\2
-        bvc check_\2
-        #print s_\1
+        bit \1          ; The `bit` instruction puts bit 7 of the argument
+        bmi \2          ; into the N and flag and bit 6 into the V flag.
+        bvc \2          ; We then branch to the next check if N is set
+                        ; or V is clear: in other words, the only time
+                        ; we skip these branches is when the button history
+                        ; has the pattern `01...`. Recall that a button is
+                        ; 1 when released and 0 when pressed, so the pattern
+                        ; `01` shows a transition from released (1) to
+                        ; pressed (0).
         .endm
 
 *       = $00fb
