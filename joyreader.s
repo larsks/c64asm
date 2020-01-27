@@ -65,11 +65,7 @@ check_bottom:
 
 say_hello:
         jsr $e544
-        lda #(s_hello & $00ff)
-        sta target
-        lda #(s_hello >> 8)
-        sta target + 1
-        jsr print_
+        #print s_hello
         rts
 
 ; from https://codebase64.org/doku.php?id=base:joystick_input_handling
