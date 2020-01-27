@@ -83,8 +83,8 @@ print_:
         ldy #0
 loop:   
         lda (target), y
-        cmp #0
-        beq eol
+        beq eol         ; stop looping when we reach end-of-string
+                        ; marker
         jsr $ffd2
         iny
         bne loop
