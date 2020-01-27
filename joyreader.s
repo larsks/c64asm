@@ -20,8 +20,9 @@ print   .macro
         .endm
 
 ; ckbtn <button> <label_if_not_pressed>
-; If the named button has been pressed, print the name. Otherwise
-; branch to <label_if_not_pressed>
+;
+; If button is not pressed, branch to <label_if_not_pressed>. Otherwise,
+; continuing executing.
 ckbtn   .macro
         bit \1          ; The `bit` instruction puts bit 7 of the argument
         bmi \2          ; into the N and flag and bit 6 into the V flag.
