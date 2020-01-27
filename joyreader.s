@@ -40,7 +40,15 @@ right   .byte 0
 fire    .byte 0
 
 start:
+        lda #$ff
+        sta up
+        sta down
+        sta right
+        sta left
+        sta fire
+readloop:
         jsr read_joystick
+
 check_up:
         #ckbtn up, down
 check_down:
