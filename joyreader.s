@@ -2,6 +2,9 @@
 
 CR      = 13
 LF      = 10
+CLEARSCREEN = $e544
+CHROUT  = $ffd2
+PRA     = $dc00
 
 ; wrapper for the print_ subroutine that takes care
 ; of loading a pointer into target.
@@ -68,13 +71,13 @@ check_bottom:
         jmp readloop
 
 say_hello:
-        jsr $e544
+        jsr CLEARSCREEN
         #print s_hello
         rts
 
 ; from https://codebase64.org/doku.php?id=base:joystick_input_handling
 read_joystick:
-        lda $dc00
+        lda PRA
         lsr A
         ror up
         lsr A
@@ -93,14 +96,14 @@ _loop:
         lda (target), y
         beq eol         ; stop looping when we reach end-of-string
                         ; marker
-        jsr $ffd2
+        jsr CHROUT
         iny
         bne _loop
 eol:                    ; print cr/lf
         lda #CR
-        jsr $ffd2
+        jsr CHROUT
         lda #LF
-        jsr $ffd2
+        jsr CHROUT
         rts
 
 ;
