@@ -11,6 +11,13 @@ println .macro
         jsr print
         .endm
 
+ckbtn   .macro
+        bit \1
+        bmi check_\2
+        bvc check_\2
+        #println s_\1
+        .endm
+
 *       = $00fb
 target  .addr ?
 
@@ -28,31 +35,17 @@ fire    .byte 0
 start:
         jsr read_joystick
 check_up:
-        bit up
-        bmi check_down
-        bvc check_down
-        #println s_up
+        #ckbtn up, down
 check_down:
-        bit down
-        bmi check_left
-        bvc check_left
-        #println s_down
+        #ckbtn down, left
 check_left:
-        bit left
-        bmi check_right
-        bvc check_right
-        #println s_left
+        #ckbtn left, right
 check_right:
-        bit right
-        bmi check_fire
-        bvc check_fire
-        #println s_right
+        #ckbtn right, fire
 check_fire:
-        bit fire
-        bmi bottom
-        bvc bottom
+        #ckbtn fire, bottom
         jmp say_hello
-bottom:
+check_bottom:
         jmp start
 
 say_hello:
