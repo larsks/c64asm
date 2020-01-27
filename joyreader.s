@@ -4,7 +4,7 @@ CR      = 13
 LF      = 10
 
 ; wrapper for the print_ subroutine that takes care
-; of loading a target address into target.
+; of loading a pointer into target.
 print   .macro
         lda #(\1 & $00ff)
         sta target
@@ -28,6 +28,10 @@ target  .addr ?         ; This is where we store the address for
 
 
 ; program header from http://tass64.sourceforge.net/
+;
+; This creats a one-line BASIC program which contains the
+; necessary SYS instruction to run the main application
+; (so the operator can just type "RUN").
 *       = $0801
         .word (+), 10   ;pointer, line number
         .null $9e, format("%d", start) ;will be sys 2061
@@ -61,7 +65,7 @@ check_fire:
         #ckbtn fire, bottom
         jmp say_hello
 check_bottom:
-        jmp start
+        jmp readloop
 
 say_hello:
         jsr $e544
@@ -85,13 +89,13 @@ read_joystick:
 
 print_:
         ldy #0
-loop:   
+_loop:
         lda (target), y
         beq eol         ; stop looping when we reach end-of-string
                         ; marker
         jsr $ffd2
         iny
-        bne loop
+        bne _loop
 eol:                    ; print cr/lf
         lda #CR
         jsr $ffd2
@@ -100,7 +104,7 @@ eol:                    ; print cr/lf
         rts
 
 ;
-; String constants
+; Strings
 ;
 
 s_hello:
