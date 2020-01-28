@@ -138,24 +138,17 @@ eol:                    ; print cr/lf
 s_welcome:
         .text "========================================", CR, LF
         .text "press joystick buttons (fire to exit)", CR, LF
-        .text "========================================"
-        .byte 0
+        .null "========================================"
 s_goodbye:
         .text "========================================", CR, LF
-        .text "fire button detected", CR, LF
-        .byte 0
+        .null "fire button detected", CR, LF
 s_left:
-        .text "left"
-        .byte 0
+        .null "left"
 s_right:
-        .text "right"
-        .byte 0
+        .null "right"
 s_up:
-        .text "up"
-        .byte 0
+        .null "up"
 s_down:
-        .text "down"
-        .byte 0
+        .null "down"
 s_fire:
-        .text "fire"
-        .byte 0
+        .null "fire"
