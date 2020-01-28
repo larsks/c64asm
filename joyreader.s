@@ -1,10 +1,10 @@
 ;; Joystick bits in $dc00: - - F R L D U -
 
-CR      = 13
-LF      = 10
+CR          = 13
+LF          = 10
 CLEARSCREEN = $e544
-CHROUT  = $ffd2
-PRA     = $dc00
+CHROUT      = $ffd2
+PRA         = $dc00
 
 ; print <address>
 ;
