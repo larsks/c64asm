@@ -63,6 +63,10 @@ start:
         sta right
         sta left
         sta fire
+
+        jsr CLEARSCREEN
+        print s_welcome
+
 readloop:
         jsr read_joystick
 
@@ -80,13 +84,12 @@ check_right:
         #print s_right
 check_fire:
         #ckbtn fire, bottom
-        jmp say_hello
+        jmp exit
 bottom:
         jmp readloop
 
-say_hello:
-        jsr CLEARSCREEN
-        #print s_hello
+exit:
+        #print s_goodbye
         rts
 
 ; from https://codebase64.org/doku.php?id=base:joystick_input_handling
@@ -124,8 +127,14 @@ eol:                    ; print cr/lf
 ; Strings
 ;
 
-s_hello:
-        .text "hello world"
+s_welcome:
+        .text "========================================", CR, LF
+        .text "press joystick buttons (fire to exit)", CR, LF
+        .text "========================================"
+        .byte 0
+s_goodbye:
+        .text "========================================", CR, LF
+        .text "fire button detected", CR, LF
         .byte 0
 s_left:
         .text "left"
