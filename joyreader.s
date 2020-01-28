@@ -11,10 +11,9 @@ PRA     = $dc00
 ; wrapper for the print_ subroutine that takes care
 ; of loading a pointer into target.
 print   .macro
-        lda #(\1 & $00ff)
-                        ; A pointer is 16 bits but our registers are
+        lda #<\1        ; A pointer is 16 bits but our registers are
         sta target      ; only 8 bits, so we need to separately load
-        lda #(\1 >> 8)  ; and store the low byte of the pointer followed
+        lda #>\1        ; and store the low byte of the pointer followed
         sta target + 1  ; by the high byte of the pointer.
         jsr print_
         .endm
