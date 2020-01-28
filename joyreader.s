@@ -92,6 +92,11 @@ exit:
         #print s_goodbye
         rts
 
+; read_joystick
+;
+; read current joystick state. stores 8-bit history for each
+; direction + fire button.
+;
 ; from https://codebase64.org/doku.php?id=base:joystick_input_handling
 read_joystick:
         lda PRA
@@ -107,10 +112,14 @@ read_joystick:
         ror fire
         rts
 
+; print_
+;
+; print a null terminated string located at the pointer stored
+; in target. print a <CR><LF> pair at the end of the string.
 print_:
         ldy #0
 _loop:
-        lda (target), y
+        lda (target), y ; get character from target[y]
         beq eol         ; stop looping when we reach end-of-string
                         ; marker
         jsr CHROUT
