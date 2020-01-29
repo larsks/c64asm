@@ -1,4 +1,4 @@
-;; Joystick bits in $dc00: - - F R L D U -
+; joyreader
 
 CR          = 13
 LF          = 10
@@ -93,8 +93,16 @@ exit:
 
 ; read_joystick
 ;
-; read current joystick state. stores 8-bit history for each
-; direction + fire button.
+; read current state for joystick on port 2.  joystick state is stored
+; in $dc00 (PRA) in the following bits:
+;
+; +-------+-------+-------+-------+-------+-------+-------+-------+
+; |       |       |       | fire  | right | left  | down  | up    |
+; +-------+-------+-------+-------+-------+-------+-------+-------+
+;     7       6       5      4        3       2       1       0
+;
+; We store an 8-bit history for each direction + fire button in
+; vars up, down, left, right, and fire.
 ;
 ; from https://codebase64.org/doku.php?id=base:joystick_input_handling
 read_joystick:
