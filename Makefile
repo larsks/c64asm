@@ -2,6 +2,10 @@ SRCS = \
        hello.s \
        joyreader.s
 
+DEFS = \
+       kernal.s \
+       cia.s
+
 BINS = $(SRCS:.s=.prg)
 
 %.prg: %.s
@@ -15,4 +19,4 @@ all: $(BINS)
 clean:
 	rm -f $(BINS)
 
-joyreader.prg: joyreader.s kernal.s
+joyreader.prg: $(DEFS)

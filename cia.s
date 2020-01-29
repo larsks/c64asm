@@ -1,0 +1,35 @@
+; CIA1: keyboard and joysticks
+CIA1_PRA     = $DC00
+CIA1_PRB     = $DC01
+CIA1_DDRA    = $DC02
+CIA1_DDRB    = $DC03
+CIA1_TAL     = $DC04
+CIA1_TAH     = $DC05
+CIA1_TBL     = $DC06
+CIA1_TBH     = $DC07
+CIA1_TOD10   = $DC08
+CIA1_TODSEC  = $DC09
+CIA1_TODMIN  = $DC0A
+CIA1_TODHR   = $DC0B
+CIA1_SDR     = $DC0C
+CIA1_ICR     = $DC0D
+CIA1_CIA     = $DC0E
+CIA1_CRB     = $DC0F
+
+; CIA2: serial bus and user port
+CIA2_PRA     = $DD00
+CIA2_PRB     = $DD01
+CIA2_DDRA    = $DD02
+CIA2_DDRB    = $DD03
+CIA2_TAL     = $DD04
+CIA2_TAH     = $DD05
+CIA2_TBL     = $DD06
+CIA2_TBH     = $DD07
+CIA2_TOD10   = $DD08
+CIA2_TODSEC  = $DD09
+CIA2_TODMIN  = $DD0A
+CIA2_TODHR   = $DD0B
+CIA2_SDR     = $DD0C
+CIA2_ICR     = $DD0D
+CIA2_CIA     = $DD0E
+CIA2_CRB     = $DD0F

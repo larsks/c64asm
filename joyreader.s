@@ -1,11 +1,11 @@
 ; joyreader
 
 .include "kernal.s"
+.include "cia.s"
 
 CR          = 13
 LF          = 10
 CLEARSCREEN = $e544
-PRA         = $dc00
 
 ; print <address>
 ;
@@ -107,7 +107,7 @@ exit:
 ;
 ; from https://codebase64.org/doku.php?id=base:joystick_input_handling
 read_joystick:
-        lda PRA
+        lda CIA1_PRA
         lsr A
         ror up
         lsr A
