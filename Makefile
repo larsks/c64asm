@@ -1,4 +1,7 @@
-SRCS = $(wildcard *.s)
+SRCS = \
+       hello.s \
+       joyreader.s
+
 BINS = $(SRCS:.s=.prg)
 
 %.prg: %.s
@@ -11,3 +14,5 @@ all: $(BINS)
 
 clean:
 	rm -f $(BINS)
+
+joyreader.prg: joyreader.s kernal.s

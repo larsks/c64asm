@@ -1,9 +1,10 @@
 ; joyreader
 
+.include "kernal.s"
+
 CR          = 13
 LF          = 10
 CLEARSCREEN = $e544
-CHROUT      = $ffd2
 PRA         = $dc00
 
 ; print <address>
