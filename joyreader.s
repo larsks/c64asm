@@ -152,3 +152,5 @@ s_down:
         .null "down"
 s_fire:
         .null "fire"
+
+; vim: set syntax=64tass :
