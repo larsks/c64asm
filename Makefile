@@ -1,6 +1,7 @@
 SRCS = \
        hello.s \
-       joyreader.s
+       joyreader.s \
+       joyreader16.s
 
 DEFS = \
        kernal.s \
