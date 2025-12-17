@@ -1,4 +1,6 @@
 ; joyreader
+; 
+; reads events from joystick port 2 and displays them on the console
 
 .include "kernal.s"
 .include "cia.s"
