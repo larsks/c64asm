@@ -73,25 +73,25 @@ readloop:
         jsr read_joystick
 
 check_up:
-        #ckbtn up, check_down
-        #print s_up
+        ckbtn up, check_down
+        print s_up
 check_down:
-        #ckbtn down, check_left
-        #print s_down
+        ckbtn down, check_left
+        print s_down
 check_left:
-        #ckbtn left, check_right
-        #print s_left
+        ckbtn left, check_right
+        print s_left
 check_right:
-        #ckbtn right, check_fire
-        #print s_right
+        ckbtn right, check_fire
+        print s_right
 check_fire:
-        #ckbtn fire, bottom
+        ckbtn fire, bottom
         jmp exit
 bottom:
         jmp readloop
 
 exit:
-        #print s_goodbye
+        print s_goodbye
         rts
 
 ; read_joystick
